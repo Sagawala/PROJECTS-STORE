@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration and Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+      font-weight: bold;
+    }
+
+    .input-icon {
+      position: relative;
+    }
+
+    .input-icon i {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #888;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 5px 30px 5px 40px;
+      width: 200px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .signup-button {
+      display: inline-block;
+      background-color: #87CEFA;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .lock-icon {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .back-to-login {
+      display: inline-block;
+      background-color: #87CEFA;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login Form</h2>
+  <form id="loginForm">
+    <div class="input-icon">
+      <i class="fas fa-envelope"></i>
+      <input type="email" id="login_email" name="login_email" placeholder="Email" required>
+    </div>
+    <br><br>
+    <div class="input-icon">
+      <i class="fas fa-lock"></i>
+      <input type="password" id="login_password" name="login_password" placeholder="Password" required>
+    </div>
+    <br><br>
+    <input type="submit" value="Login">
+    <br><br>
+    <button id="showCredentials" class="lock-icon"></button>
+    <br><br>
+    <a href="#" id="signupLink" class="signup-button">Sign Up</a>
+  </form>
+
+  <h2 id="registrationTitle" class="hidden">Registration Form</h2>
+  <form id="registrationForm" class="hidden">
+    <div class="input-icon">
+      <i class="fas fa-user"></i>
+      <input type="text" id="name" name="name" placeholder="Name" required>
+    </div>
+    <br><br>
+    <div class="input-icon">
+      <i class="fas fa-envelope"></i>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+    </div>
+    <br><br>
+    <div class="input-icon">
+      <i class="fas fa-lock"></i>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+    </div>
+    <br><br>
+    <div class="input-icon">
+      <i class="fas fa-lock"></i>
+      <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+    </div>
+    <br><br>
+    <input type="submit" value="Register">
+    <br><br>
+    <a href="#" id="loginLink" class="back-to-login">Back to Login</a>
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const registrationTitle = document.getElementById('registrationTitle');
+    const registrationForm = document.getElementById('registrationForm');
+    const showCredentialsButton = document.getElementById('showCredentials');
+    const signupLink = document.getElementById('signupLink');
+    const loginLink = document.getElementById('loginLink');
+
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const login_email = document.getElementById('login_email').value;
+      const login_password = document.getElementById('login_password').value;
+
+      // Retrieve user data from local storage
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (!user || user.email !== login_email || user.password !== login_password) {
+        alert('Invalid email or password. Please try again.');
+        return;
+      }
+
+      alert('Login successful! Welcome, ' + user.name + '!');
+
+      // Redirect to index.html
+      window.location.href = './index.html';
+    });
+
+    showCredentialsButton.addEventListener('click', function() {
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (!user) {
+        alert('No user credentials found.');
+        return;
+      }
+
+      const message = 'Stored Credentials:\n' +
+                      'Name: ' + user.name + '\n' +
+                      'Email: ' + user.email + '\n' +
+                      'Password: ' + user.password;
+
+      alert(message);
+    });
+
+    signupLink.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // Hide the login form
+      loginForm.classList.add('hidden');
+
+      // Display the registration form
+      registrationTitle.classList.remove('hidden');
+      registrationForm.classList.remove('hidden');
+    });
+
+    loginLink.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // Hide the registration form
+      registrationTitle.classList.add('hidden');
+      registrationForm.classList.add('hidden');
+
+      // Display the login form
+      loginForm.classList.remove('hidden');
+    });
+
+    registrationForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirm_password = document.getElementById('confirm_password').value;
+
+      if (password !== confirm_password) {
+        alert('Passwords do not match. Please try again.');
+        return;
+      }
+
+      const user = {
+        name: name,
+        email: email,
+        password: password
+      };
+
+      // Save user data to local storage
+      localStorage.setItem('user', JSON.stringify(user));
+
+      // Hide the registration form
+      registrationTitle.classList.add('hidden');
+      registrationForm.classList.add('hidden');
+
+      // Display the login form
+      loginForm.classList.remove('hidden');
+
+      alert('Registration successful! Now you can log in.');
+    });
+  </script>
+</body>
+</html>
