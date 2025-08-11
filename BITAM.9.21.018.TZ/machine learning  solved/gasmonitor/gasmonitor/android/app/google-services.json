@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "448417467549",
+    "firebase_url": "https://suza-gas-monitor-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "suza-gas-monitor",
+    "storage_bucket": "suza-gas-monitor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448417467549:android:31eafe93f1bf792be99874",
+        "android_client_info": {
+          "package_name": "com.example.gasmonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448417467549-8ouep45b3v64ebi5lb052o1b74dq1tp7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gasmonitor",
+            "certificate_hash": "d36a14b8eb4ce7a3feb42c26a91ee2450e177e7f"
+          }
+        },
+        {
+          "client_id": "448417467549-osne4hqpv0rb2p1c609orgbsvncvk6j7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD38K5QMimP6491i4VfhBlply7earX9Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448417467549-osne4hqpv0rb2p1c609orgbsvncvk6j7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
